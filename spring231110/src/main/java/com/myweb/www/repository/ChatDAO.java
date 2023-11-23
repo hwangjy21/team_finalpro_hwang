@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.myweb.www.domain.ChatDTO;
 
+
 import com.myweb.www.security.MemberVO;
+
 
 
 public interface ChatDAO {
@@ -20,5 +22,6 @@ public interface ChatDAO {
 	List<MemberVO> selectEmp2(ChatDTO chatdto);
 
 	int submitEmp2(ChatDTO chatDTO);
+
 
 }

@@ -38,11 +38,10 @@ public class CommentController {
 	}
 
 	// 댓글 등록
-	@PostMapping(value = "/postcmt", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
+	@PostMapping(value = "/post", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> post(@RequestBody CommentVO cvo) {
-		log.info("여기들어오는지 확인");
 		int isOk = csv.addComment(cvo);
-		log.info("cvo>>>> {}",cvo);
+
 		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -50,82 +49,78 @@ public class CommentController {
 	
 	// 댓글 리스트 출력
 	@GetMapping(value = "/list/{bno}/{page}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PagingHandler> list(@PathVariable("bno") long bno,@PathVariable("page") int page,Principal principal) {
-		
-		String authId=principal.getName().toString();
+	public ResponseEntity<PagingHandler> list(@PathVariable("bno") long bno,@PathVariable("page") int page) {
 		log.info(">>>>>>> bno / page >>> "+bno +"  "+page);
 		PagingVO pgvo = new PagingVO(page,5); //qty=5
-		PagingHandler list = csv.getList(bno,pgvo,authId);
+		PagingHandler list = csv.getList(bno,pgvo);
 		log.info(">>>>>>> ph List >>>>"+list);
 		return new ResponseEntity<PagingHandler>(list, HttpStatus.OK);
 
 	}
 
 	// 댓글 삭제
-	@DeleteMapping(value = "/remove/{cmtno}/{empid}", produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> remove(@PathVariable("cmtno") long cmtNo,@PathVariable("empid") String empId,Principal principal) {
-		log.info("principal.getName {}",principal.getName().toString());
-		log.info("테스트다1");
-		log.info("cno >>{}",cmtNo);
-		log.info("empId >>{}",empId);
-		int isOk=0;
-		if(principal.getName().toString().equals(empId)) {	
-			isOk= csv.remove(cmtNo);
-			log.info("테스트다2");
+//	@DeleteMapping(value = "/remove/{cno}}", produces = MediaType.TEXT_PLAIN_VALUE)
+//	public ResponseEntity<String> remove(@PathVariable("cno") long cno) {
+//		
+//		int isOk = csv.remove(cno);
+//
+//		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
+//				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+//
+//	}
+	
+	@DeleteMapping(value="/remove/{cno}/{writer}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> erase(@PathVariable("cno")long cno, @PathVariable("writer")String writer, 
+			Principal principal){
+		log.info(">>>>>> comment delete >> writer>  "+writer);
+		String username = principal.getName(); 
+		log.info(">>>>>> comment delete >> username>  "+username);
+		int isOk = 0;
+		if(writer.equals(username)) {
+			 isOk = csv.remove(cno);
 		}
-
-		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
-				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
-
-	}
+		return isOk > 0 ?  new ResponseEntity<String>("1", HttpStatus.OK) :
+			new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 		
-	//수정
+	}
+	
+	
+	
+
+	// 댓글 수정(모달창)
+//	@PutMapping(value = "/modify", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
+//	public ResponseEntity<String> modify(@RequestBody CommentVO cvo, Principal principal) {
+//		log.info("프린시펄>>"+principal);
+//		String username = principal.getName();
+//		log.info("프린시펄에서 따온 username>>"+username);
+//
+//		int isOk = 0;
+//		if(제이손에서 writer만 어떻게추출하고 싶은 부분.equals(username)) {
+//		isOk = csv.modify(cvo);
+//		}
+//		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
+//				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+//
+//	}
+	
+	
 	@PutMapping(value = "/modify", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> modify(@RequestBody CommentVO cvo, Principal principal) {
-	    log.info("프린시펄에서 따온 username>> {}", principal.getName().toString());
-	    log.info("cvo{}", cvo);
-	    log.info("cvo.getEmpId {}", cvo.getEmpId());
-	    
-	    int isOk = 0;
-	    if(principal.getName().toString().equals(cvo.getEmpId())) {
-	    	isOk = csv.modify(cvo);
-	    }
+	    log.info("프린시펄>>" + principal);
+	    String username = principal.getName();
+	    log.info("프린시펄에서 따온 username>>" + username);
 
+	    String writer = cvo.getWriter(); // CommentVO 객체에서 writer 추출
+	    log.info("JSON에서 추출한 writer>> " + writer);
+
+	    int isOk = 0;
+	    if(writer.equals(username)) {
+	        isOk = csv.modify(cvo);
+	    }
 	    return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 	            : new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	//댓글 좋아요
-		@PostMapping(value="/commentLike/{cmtno}/{id}",produces = MediaType.TEXT_PLAIN_VALUE)
-		public ResponseEntity<String> boardLike(@PathVariable("cmtno") long cmtNo, @PathVariable("id") String id){
-			log.info("cmtNo>>>{}",cmtNo);
-			log.info("id>>>{}",id);
-			
-			//체크되어있는지 안되어있는지 확인
-			//1이면 이미 체크, 0이면 아닌거
-			int check = csv.boardLikeCheck(cmtNo,id);
-			log.info("체크되어있는지 안되어있는지 확인{}",check);
-			
-			if(check>0) { //이미 체크가 되어있으면
-				//like취소
-				csv.deleteBoardLike(cmtNo,id);
-				
-				return new ResponseEntity<String>("0",HttpStatus.OK);
-			}else { //체크가 안되어있다면
-				//like체크
-				csv.addBoardLike(cmtNo,id);
-				return new ResponseEntity<String>("1",HttpStatus.OK);
-			}
-			
-		}
-		
-	//좋아요 수 구하기
-		@GetMapping(value = "/commentLikeQty/{cmtno}", produces = MediaType.TEXT_PLAIN_VALUE)
-		public ResponseEntity<String> cmtLikeQty(@PathVariable("cmtno") long cmtNo){
-			int cmtLikeQty=csv.getCmtLikeQty(cmtNo);
-			String strCmtLikeQty = String.valueOf(cmtLikeQty);
-			
-			return new ResponseEntity<String>(strCmtLikeQty,HttpStatus.OK);
-		}
+	
 
 }

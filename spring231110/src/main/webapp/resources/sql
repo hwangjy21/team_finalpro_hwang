@@ -77,7 +77,7 @@ CREATE TABLE `file` (
   `car_no` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
   
-  
+  )
   
   
   --club 테이블--
@@ -93,4 +93,17 @@ CREATE TABLE `file` (
 
 );
   
-) 
+  
+  --approval 테이블--
+  
+  CREATE TABLE approval (
+    appr_no BIGINT PRIMARY KEY,
+    vaca_no BIGINT,
+    car_no VARCHAR(40),
+    emp_no BIGINT,
+    read_or_not BOOLEAN
+);
+
+
+
+alter table approval add column club_no varchar(45);

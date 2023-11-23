@@ -7,7 +7,9 @@
 		insert into chat
 		values(NULL,#{fromID},#{toID},#{chatContent},NOW(),null,null,null,null);
 	</insert>
+
 	<select id="selectAll" resultType="com.myweb.www.domain.ChatDTO">	
+
 		select * from chat where toID is null limit 500;
 	</select>
 	<select id="selectEmpId" resultType="com.myweb.www.security.MemberVO">
@@ -21,5 +23,4 @@
 		values(NULL,#{fromID},#{toID},#{chatContent},NOW(),null,null,null,null);
 	</insert>
 	
-
 </mapper>

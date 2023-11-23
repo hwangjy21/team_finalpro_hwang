@@ -29,21 +29,6 @@ public interface BoardDAO {
 
 	int clubTotalCount(@Param("clubCd") String clubCd,@Param("pgvo") PagingVO pgvo);
 
-	void updateCmtCount();
-
-	void updateReadQty(long bno);
-
-	int boardLikeCheck(@Param("bno") long bno,@Param("id") String id);
-
-	void deleteBoardLike(@Param("bno") long bno,@Param("id") String id);
-
-	void addBoardLike(@Param("bno") long bno,@Param("id") String id);
-
-	void updateLikeQty(@Param("bno") long bno,@Param("num") int num);
-
-
-
-
 
 
 }

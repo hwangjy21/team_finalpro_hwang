@@ -11,14 +11,7 @@
 <title>DepartMent Board List Page</title>
 </head>
 <body>
-	<jsp:include page="../common/l_side.jsp" />
-
-	<jsp:include page="../common/nav.jsp" />
-	
-	<div class="total">
-		<div class="subject">동호회 게시판</div>
-		<div class="content">
-		   <!-- DataTales Example -->
+	   <!-- DataTales Example -->
 	   <div class	="box">
 	     <div class="box2">
                     <div class="card shadow mb-4">
@@ -82,8 +75,8 @@
                                             <th>제목</th>
                                             <th>작성자</th>
                                             <th>작성일</th>
-                                            <th>댓글수</th> 
-                                  		 	<th>조회수</th> 
+                                          <!--   <th>조회수</th>
+                                            <th>댓글수</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -93,8 +86,6 @@
                                             <td><a href="/board/boardDetail?bno=${bvo.bno}">${bvo.title}</a></td>
                                             <td>${bvo.id}(${bvo.empNo})</td>
                                             <td>${bvo.modDate}</td>                                          
-                                            <td>${bvo.cmtQty}</td>                                          
-                                            <td>${bvo.readQty}</td>                                          
                                         </tr>
                                         </c:forEach>
                                     </tbody>
@@ -134,10 +125,7 @@
                     </div>
                     </div>
              </div>
-		</div>
-	</div>
-	
-          <jsp:include page="../common/footer.jsp" />   
+             
              
 </body>
 </html>

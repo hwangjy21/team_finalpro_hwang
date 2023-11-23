@@ -22,9 +22,6 @@ public class BoardVO {
 	private String boardType;//게시판 종류(익명,보드,동호회)
 	private String clubCd;//동호회 코드
 	private String depCd;//부서코드
-	private int cmtQty;//댓글개수
-	private int readQty;//조회수
-	private int fileQty;//파일수
-	private int likeQty;//게시글 좋아요수
-	private boolean likeCheck;// 로그인한 아이디가 한 게시물 좋아요한 유무
+	private int commentCnt;//댓글개수
+	private int readCnt;//조회수
 }

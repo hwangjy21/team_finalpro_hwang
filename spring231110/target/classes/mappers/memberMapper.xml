@@ -10,6 +10,7 @@
 		#{empBirth});
 	</insert>
 
+
 	<!-- 기본아이디는 '롤_유저'로 등록 -->
 	<insert id="insertAuthInit">
 		insert into auth_member values('ROLE_USER', #{id})
@@ -38,11 +39,8 @@
 		select * from member
 		<include refid="search"></include>
 		limit #{pageStart}, #{qty}
+
 	</select>
-	
-	<!-- select m.emp_nm, m.id, m.addr, m.phone, c.club_nm, d.dep_nm from club c 
-		right join member m on m.club_cd = c.club_cd
-		left join department d on m.dep_cd = d.dep_cd -->
 
 	<select id="selectOne"
 		resultType="com.myweb.www.security.MemberVO">
@@ -51,6 +49,13 @@
 
 	<update id="updatePw">
 		update member set pw = #{pw} where id = #{id}
+	</update>
+
+	<update id="modifyPwdEmpty">
+		update member set nick_name=#{nickName} where id=#{id}
+	</update>
+	<update id="modify">
+		update member set nick_name=#{nickName} where id=#{id}
 	</update>
 	<update id="remove">
 		delete from member where id = #{id}
@@ -63,6 +68,11 @@
 		select id from member where id = #{id}
 	</select>
 
+	<select id="selectOne2"
+		resultType="com.myweb.www.security.MemberVO">
+		select * from member where id =#{id};
+	</select>
+
 	<select id="getTotalCount" resultType="int">
 		select count(*) from member
 		<include refid="search"></include>
@@ -71,10 +81,6 @@
 	<select id="selectDepCd" resultType="String">
 	select dep_cd from member where id=#{id}
 	</select>
-	
-	<select id="selecClubCd" resultType="String">
-	select club_cd from member where id=#{id}
-	</select>	
 
   <sql id="search">
      <if test="type != null">
@@ -82,20 +88,11 @@
            <foreach collection="typeToArray" item="typed">
               <trim prefix="or">
                  <choose>
-                    <when test="typed =='n'.toString()">
-                       emp_nm like concat('%',#{keyword},'%')
-                    </when>
-                    <when test="typed =='i'.toString()">
+                    <when test="typed =='e'.toString()">
                        id like concat('%',#{keyword},'%')
                     </when>
-                    <when test="typed =='a'.toString()">
-                       addr like concat('%',#{keyword},'%')
-                    </when>
-                    <when test="typed =='d'.toString()">
-                       dep_cd like concat('%',#{keyword},'%')
-                    </when>
-                    <when test="typed =='c'.toString()">
-                       club_cd like concat('%',#{keyword},'%')
+                    <when test="typed =='n'.toString()">
+                       nick_name like concat('%',#{keyword},'%')
                     </when>
                  </choose>
               </trim>

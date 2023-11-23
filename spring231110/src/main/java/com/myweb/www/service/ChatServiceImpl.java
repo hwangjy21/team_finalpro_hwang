@@ -15,6 +15,7 @@ import com.myweb.www.repository.ChatDAO;
 import com.myweb.www.repository.CommentDAO;
 import com.myweb.www.repository.FileDAO;
 
+
 import com.myweb.www.security.MemberVO;
 
 
@@ -53,7 +54,6 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 
-
 	@Override
 	public List<MemberVO> list(ChatDTO chatdto) {
 		// TODO Auto-generated method stub
@@ -75,7 +75,6 @@ public class ChatServiceImpl implements ChatService {
 		int isUp = chatdao.submitEmp2(chatDTO);
 		return isUp;
 	}
-
 
 //	@Transactional
 //	@Override

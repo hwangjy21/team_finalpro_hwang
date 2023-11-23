@@ -31,6 +31,7 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public int register(MemberVO mvo) {
+		//기존 메서드 활용
 		int isOk = mdao.insertMember(mvo); //bno 등록
 		return mdao.insertAuthInit(mvo.getId());
 	}
@@ -43,7 +44,10 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<MemberVO> getList(PagingVO pagingVO) {
+		// TODO Auto-generated method stub
+
 		return mdao.selectAll(pagingVO);
+		
 	}
 
 	@Transactional
@@ -61,6 +65,25 @@ public class MemberServiceImpl implements MemberService {
 		log.info(">>>>> amdto >> "+amdto.toString());
 		return amdto;
 	}
+//	@Transactional
+//	@Override
+//	public BoardDTO detail2(long bno) {
+//		bdao.readCount(bno);
+//		BoardDTO bdto = new BoardDTO();
+//		bdto.setBvo(bdao.selectOne(bno));	//bdao bvo호출 select * from board where bno=#{bno}
+//		
+//		bdto.setFlist(fdao.getFileList(bno));	//bdao bvo호출
+//
+////      DTO클래스는 아래와 같음
+////		public class BoardDTO {
+////			private BoardVO bvo;
+////			private List<FileVO> flist;
+////			
+////		}
+//
+//		return bdto;
+//	}
+
 
 	@Override
 	public int modify(MemberVO mvo) {
@@ -82,8 +105,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO memberDetail(String id) {
-		return mdao.selectOne(id);
+	public MemberVO detail2(String email) {
+		// TODO Auto-generated method stub
+		return mdao.selectOne2(email);
 	}
 
 	@Override
@@ -113,8 +137,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int insert(long empNo, FileVO fvo) {
-		return fdao.insertProfile(empNo, fvo);
+	public int insert(long empNo, List<FileVO> flist) {
+		return fdao.insertProfile(empNo, flist.get(0));
 	}
 
 	@Override

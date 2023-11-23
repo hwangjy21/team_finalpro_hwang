@@ -18,6 +18,12 @@
 	<!-- nav -->
 	<nav class="nav_header">
 		<div class="icon_div" style="font-size: 30px;"><i class="bi bi-bell"></i></div>
+	
+		<div class="c_logo">
+			<a href="index"> <img alt="회사로고 없음"
+				src="../../resources/img/회사로고.jpg">
+			</a>
+		</div>
 	</nav>
 </body>
 </html>

@@ -8,25 +8,16 @@ import com.myweb.www.handler.PagingHandler;
 
 public interface CommentService {
 
-	int addComment(CommentVO cvo); //O
+	int addComment(CommentVO cvo);
 
 //	List<CommentVO> getList(long bno);
 
-	int remove(long cmtNo); //o
+	int remove(long cno);
 
 	void deleteCommentAll(long bno);
 
-	int modify(CommentVO cvo); //o
+	int modify(CommentVO cvo);
 
-	PagingHandler getList(long bno, PagingVO pgvo, String authId); //0
-
-	int boardLikeCheck(long cmtNo, String id);
-
-	void deleteBoardLike(long cmtNo, String id);
-
-	void addBoardLike(long cmtNo, String id);
-
-	int getCmtLikeQty(long cmtNo);
-
+	PagingHandler getList(long bno, PagingVO pgvo);
 
 }

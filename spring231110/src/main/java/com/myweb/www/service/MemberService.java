@@ -23,7 +23,7 @@ public interface MemberService {
 	
 	int remove(String email);
 
-	MemberVO memberDetail(String id);
+	MemberVO detail2(String email);
 
 	int getTotalCount(PagingVO pagingVO);
 
@@ -33,8 +33,10 @@ public interface MemberService {
 
 	int checkId(String id);
 
-	int insert(long empNo, FileVO fvo);
+	int insert(long empNo, List<FileVO> flist);
 
 	long getMaxEmpNo();
+
+	boolean approval_club(MemberVO mvo);
 	
 }

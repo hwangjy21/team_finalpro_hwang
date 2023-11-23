@@ -9,17 +9,14 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class FileVO {
 	private String uuid; 
 	private String saveDir;
 	private String fileName;
 	private int fileType;
-	private long depBno;
-	private long totalBno;
-	private String carNo;
-	private long empNo;
+	private long bno;
 	private long fileSize;
 	private String regAt;
 }
