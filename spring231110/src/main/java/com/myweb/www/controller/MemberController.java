@@ -1,7 +1,5 @@
 package com.myweb.www.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,22 +14,19 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.FileVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
-import com.myweb.www.security.AuthMember;
+import com.myweb.www.handler.ProfileFileHandler;
+import com.myweb.www.security.MemberDTO;
 import com.myweb.www.security.MemberVO;
 import com.myweb.www.service.MemberService;
 
@@ -50,22 +45,26 @@ public class MemberController {
 	
 	@Inject
 	private FileHandler fh;
+	
+	@Inject
+	private ProfileFileHandler pfh;
 
 	@GetMapping("/register")
 	public void register() {
 	}
-
+	
+	//사원 등록
 	@PostMapping("/register")
 	public String register(MemberVO mvo, Model m, @RequestParam(name="profile", required = false)MultipartFile[] files) {
-		List<FileVO> flist = null;
-		if(files[0].getSize()>0) {
-			flist = fh.uploadFiles(files);
-		}
 		int isOk = 1;
 		mvo.setPw(bcEncoder.encode(mvo.getPw())); // 암호화해서 넣음
 		isOk *= msv.register(mvo);
 		long empNo = msv.getMaxEmpNo();
-		isOk *= msv.insert(empNo, flist);
+		FileVO fvo = null;
+		if(files[0] != null) {
+			fvo = pfh.uploadFiles(files[0], empNo);
+		}
+		isOk *= msv.insert(empNo, fvo);
 		log.info(isOk>0? "성공": "실패");
 		return "index";
 	}
@@ -73,99 +72,63 @@ public class MemberController {
 	@GetMapping("/login")
 	public void login() {
 	}
-
+	
+	//로그인 실패 시
 	@PostMapping("/login")
 	public String loginPost(HttpServletRequest request, RedirectAttributes re) {
-		// 로그인 실패시 다시 로그인 페이지에 돌아와 오류 메시지 전송
-		// 로그인 정보 저장 //리다이렉트용RedirectStrategy //리퀘스트디스페쳐랑 비슷한?
-		// 다시 로그인 유도
-		log.info(">>> errMsg" + request.getAttribute("errMsg")); // 231030
 		re.addAttribute("id", request.getAttribute("id"));
 		re.addAttribute("errMsg", request.getAttribute("errMsg"));
-		return "redirect:/member/login"; // 이러면 다시 로그인.jsp 페이지를 가서 값을 줘야 하겠죠?
+		return "redirect:/member/login"; 
 	}
 
+	//회원 리스트(확인)
 	@GetMapping("/list")
 	public String list(Model model, PagingVO pagingVO) {
-		// 231030전경환
-		model.addAttribute("list", msv.getList(pagingVO));
-		log.info("모델은 " + model);
-
-//		log.info("페이지정보"+ph);
-		/* 페이징 처리 */
+		MemberDTO mdto = new MemberDTO();
+		mdto.setMlist(msv.getMList(pagingVO));
+		mdto.setClist(msv.getCList(pagingVO));
+		mdto.setDlist(msv.getDList(pagingVO));
+		model.addAttribute("list", mdto);
 		// 총 페이지 갯수
 		int totalCount = msv.getTotalCount(pagingVO);
-		PagingHandler ph = new PagingHandler(pagingVO, totalCount);
+		PagingHandler ph = new PagingHandler(totalCount, pagingVO);
 		model.addAttribute("ph", ph);
 		log.info("페이지정보" + ph);
-		log.info("겟메핑 /list 탐");
 		return "/member/list";
 
 	}
 
-//이하 보드 컨트롤러 그냥 복붙해서 참고중인 상태임 231030
-//리스트 출력(paging 추가)
-//	@GetMapping("/list")
-//	public String list(Model model, PagingVo pagingVO) {
-//		log.info(">>>>>>pagingVO >>" + pagingVO);
-//
-//		//댓글 수 구하기는 글
-//
-//		// 이렇게 하면 service에서 return값 설정해주면 됨
-//		model.addAttribute("list", bsv.getList(pagingVO));
-//
-//		/* 페이징 처리 */
-//		// 총 페이지 갯수
-//		int totalCount = bsv.getTotalCount(pagingVO);
-//		PagingHandler ph = new PagingHandler(pagingVO, totalCount);
-//		model.addAttribute("ph", ph);
-//		log.info("겟메핑 /list 탐");
-//		return "/board/list";
-//	}
-
 	@GetMapping({ "/detail" })
-	public void detail(Model model, @RequestParam("email") String email) {
-
-		MemberVO mvo = msv.detail2(email);
-		log.info("mvo는 " + mvo);
-		model.addAttribute("mvo", mvo); // 이러면void니 detail.jsp로 모델에 쌓아서 날아가는듯
+	public void detail(Model model, @RequestParam("id") String id) {
+		MemberVO mvo = msv.memberDetail(id);
+		model.addAttribute("mvo", mvo);
 	}
 
 	@GetMapping("/modify")
 	public void modify(@RequestParam("id") String id, Model m) {
-		log.info(">>>> 겟메핑 modify>>> email >>> " + id);
-		log.info(">>>> modify>>> email >>> " + id);
-		m.addAttribute("mvo", msv.detail2(id));
-		log.info("m " + m);
-		log.info("모디파이 겟메핑 끝");
+		m.addAttribute("mvo", msv.memberDetail(id));
 	}
-
+	
+	//회원 수정(확인)
 	@PostMapping({ "/modify" })
 	public void modify(MemberVO mvo, Model m, HttpServletRequest req, HttpServletResponse res) {
-		log.info(">>>> 포스트 메핑 modify>>> mvo >>> " + mvo);
-		log.info("2222222222222222222222");
 		int isOk = 3;
-//		log.info("mvo.getPwd().isEmpty()의 값 "+mvo.getPwd().isEmpty());
 		if (mvo.getPw() == null || mvo.getPw().isEmpty()) {
-			log.info("if(mvo.getPwd().isEmpty())" + "진입");
 			isOk = msv.modifyPwdEmpty(mvo);
 		} else {
-			log.info("mvo.getPwd().isEmpty()의 else{}" + "진입");
 			mvo.setPw(bcEncoder.encode(mvo.getPw()));
 			isOk = msv.modify(mvo);
 		}
-		log.info("if문 지난 위치");
 		logout(req, res);
 
 		m.addAttribute("isOk", isOk);
-		log.info(">>>> 포스트 메핑 modify 끝");
 	}
-
+	
+	//회원 탈퇴(확인)
 	@GetMapping("/remove")
-	public String removeMember(@RequestParam("email") String email, Model m, HttpServletRequest req,
+	public String removeMember(@RequestParam("id") String id, Model m, HttpServletRequest req,
 			HttpServletResponse res) {
-		log.info(">>>modify >> email >>" + email);
-		int isOk = msv.remove(email);
+		int isOk = msv.remove(id);
 		logout(req, res);
 		m.addAttribute("isOkDel", isOk);
 		return "index";
@@ -183,7 +146,8 @@ public class MemberController {
 	public void checkMemberInfo() {
 
 	}
-
+	
+	//본인 인증 확인
 	@PostMapping("/checkMemberInfo")
 	public String postCheckMemberInfo(MemberVO mvo, RedirectAttributes re, Model m) {
 		MemberVO detail = msv.getMemberDetail(mvo.getId());
@@ -202,7 +166,8 @@ public class MemberController {
 	@GetMapping("/modifyPw")
 	public void modifyPw() {
 	}
-
+	
+	//비밀번호 변경
 	@PostMapping("/modifyPw")
 	public String PostModifyPw(@RequestParam("pw") String pw, @RequestParam("pw2") String pw2,
 			@RequestParam("id") String id, Model m) {
@@ -225,7 +190,14 @@ public class MemberController {
 			return "alert";
 		}
 	}
-
+	
+	//아이디 일치하는지 확인
+	@PostMapping(value = "/checkId", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> checkId(@RequestBody MemberVO mvo, Model m) {
+		int isOk = msv.checkId(mvo.getId());
+		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
+				: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
 	private void logout(HttpServletRequest req, HttpServletResponse res) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

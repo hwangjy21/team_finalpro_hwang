@@ -32,12 +32,13 @@
 	<jsp:include page="common/l_side.jsp" />
 
 	<jsp:include page="common/nav.jsp" />
+	
 	<div class="total">
 		<div class="subject">주제입니다.</div>
 		<div class="content">content 입니다.</div>
 	</div>
+	
 	<jsp:include page="common/footer.jsp" />
-
 
 
 

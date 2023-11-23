@@ -124,6 +124,7 @@ display: block;
   margin-bottom: 1.25rem;
 }
 /* 모달창  */
+
 .modal-btn-box {
 	width: 100%;
 	text-align: center;
@@ -145,7 +146,7 @@ display: block;
 	align-items: center;
 	position: fixed;
 	top: 0;
-	left: 12%;
+	left: 0;
 	right: 0;
 	bottom: 0;
 	display: none;
@@ -154,17 +155,17 @@ display: block;
 
 .popup {
 	width: 100%;
-	max-width: 60%;
+	max-width: 400px;
 	background-color: #ffffff;
 	border-radius: 10px;
 	overflow: hidden;
-	background-color: rgb(19, 151, 213);
+	background-color: #3b5fbf;
 	box-shadow: 5px 10px 10px 1px rgba(0, 0, 0, .3);
 }
 
 .popup-head {
 	width: 100%;
-	height: 25px;
+	height: 50px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -172,6 +173,7 @@ display: block;
 
 .head-title {
 	font-size: 38px;
+	font-style: italic;
 	font-weight: 700;
 	letter-spacing: -3px;
 	text-align: center;
@@ -184,10 +186,7 @@ display: block;
 
 .body-content {
 	width: 100%;
-	height: 210px;		
-	font-weight : 600;
-	text-align: center;
-	font-weight: 600;
+	padding: 10px;
 }
 
 .body-titlebox {
@@ -197,34 +196,11 @@ display: block;
 	margin-bottom: 10px;
 }
 
-.body-contentbox_content {
+.body-contentbox {
 	word-break: break-word;
-	font-size: 120%;
 	overflow-y: auto;
-	padding: 5px;
-	padding-top: 20px; justify-content : center;
-	line-height: 50px;
-	margin-bottom: 40px; min-height : 50px;
-	max-height: 100px;
-	min-height: 50px;
-	justify-content: center;
-}
-
-.body-contentbox_member {
-	word-break: break-word;
-	font-size: 100%;
-	overflow-y: auto;
-	padding: 5px;
-	justify-content: center;
-	line-height: 30px;
-	min-height: 30px;
-	max-height: 50px;
-}
-
-.body-contentbox_info {
-	margin-top: 10px;
-	margin-bottom: 20px;
-	color: red;
+	min-height: 100px;
+	max-height: 200px;
 }
 
 .popup-foot {
@@ -245,23 +221,4 @@ display: block;
 
 .pop-btn.confirm {
 	border-right: 1px solid #3b5fbf;
-}
-
-.confirm_modal{
-	margin-left: 12%;
-}
-
-@media screen and (max-width: 900px) {
-	.body-content {
-	
-		
-		overflow-y: auto;
-	}
-	
-	.card__title {
-  
-  font-size: 1rem;
- 
-}
-}
 }

@@ -2,37 +2,55 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.myweb.www.repository.CommentDAO">
-  <insert id="insert">
-  insert into comment(bno,writer,content)
-  values(#{bno},#{writer},#{content})
-  </insert>
- <select id="selectAll" resultType="com.myweb.www.domain.CommentVO">
- select * from comment where bno=#{bno}
- </select>
- 
- <delete id="delete">
- delete from comment where cno=#{cno}
- </delete>
-  <delete id="deleteCommentAll">
-  delete from comment where bno=#{bno}
-  </delete>
-  <update id="update">
-  update comment set content=#{content}, mod_at=now() 
-  where cno=#{cno}
-  </update>
-  <select id="selectOneBnoTotalCount" resultType="int">
-  select count(*) from comment where bno=#{bno}
-  </select>
-  <select id="selectListPaging" resultType="com.myweb.www.domain.CommentVO">
-  select * from comment where bno=#{bno}
-  order by cno desc
-  limit #{pgvo.pageStart}, #{pgvo.qty}<!-- 파라미터 값이 2개라서(bno,pgvo) pgvo.써주는 거임 -->
-  </select>
-<!--   <update id="cmt_update"> -->
-<!--   update board set commentCount= commentCount+1 where bno = #{bno}; -->
-<!--   </update> -->
-  
-  
-  </mapper>
+<mapper namespace="com.myweb.www.repository.CommentDAO">
+	<insert id="insert">
+		insert into comment(bno,emp_no,emp_id,content)
+		values(#{bno},#{empNo},#{empId},#{content})
+	</insert>
+	<select id="selectAll"
+		resultType="com.myweb.www.domain.CommentVO">
+		select * from comment where bno=#{bno}
+	</select>
+
+	<delete id="delete">
+		delete from comment where cmt_no=#{cmtNo}
+	</delete>
+	<delete id="deleteCommentAll">
+		delete from comment where bno=#{bno}
+	</delete>
+	<update id="update">
+		update comment set content=#{content}, mod_date=now()
+		where cmt_no=#{cmtNo}
+	</update>
+	<select id="selectOneBnoTotalCount" resultType="int">
+		select count(*) from comment where bno=#{bno}
+	</select>
+	<select id="selectListPaging"
+		resultType="com.myweb.www.domain.CommentVO">
+		select * from comment where bno=#{bno}
+		order by cmt_no desc
+		limit #{pgvo.pageStart}, #{pgvo.qty}<!-- 파라미터 값이 2개라서(bno,pgvo) pgvo.써주는 거임 -->
+	</select>
+
+
+	<select id="commentLikeCheck" resultType="int">
+		select count(*) from board_like where cmt_no=#{cmtNo} and id=#{authId}
+	</select>
+	<delete id="deleteCommentLike">
+		delete from board_like where cmt_no=#{cmtNo} and id=#{id}
+	</delete>
+	<insert id="addCommentLike">
+		insert into board_like(cmt_no,id)
+		values(#{cmtNo},#{id})
+	</insert>
+	<update id="updateLikeQty">
+		update comment set like_qty=like_qty+#{num} where cmt_no=#{cmtNo}
+	</update>
+	<select id="selectCmtCount" resultType="int">
+	select count(*) from comment where bno=#{bno}
+	</select>
+	<select id="cmtLikeQty" resultType="int">
+	select count(*) from board_like where cmt_no=#{cmtNo}
+	</select>
+</mapper>
   

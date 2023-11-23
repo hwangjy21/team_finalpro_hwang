@@ -1,19 +1,12 @@
 /* 사이드 메뉴바(왼쪽) */
-/* @font-face {
-	font-family: 'MaruBuriLight';
-	src: url("../font/GodoM.otf") format("opentype"),
-		url("../font/GodoM.ttf") format("truetype");
-} */
-
-
 .left_sidemenu_div {
 	width: 12%;
 	min-height: 100vh;
-	background: linear-gradient(to bottom, rgb(19, 151, 213), #1674a1);
+	background-color: white;
 	z-index: 1000;
 	position: fixed;
-	/* 	top: 5%; */
-	padding-top: 3%;
+	padding-top: 46.891px;
+	border-right: 1.5px solid #00000024;
 }
 
 .pro_img {
@@ -23,10 +16,11 @@
 	margin: 0 auto;
 	border-radius: 50%;
 	margin-top: 5%;
+	justify-content: center;
 }
 
 .pro_img>img {
-	width: 100%;
+	width: 80%;
 	height: 100%;
 	border-radius: 50%;
 }
@@ -44,12 +38,13 @@
 	overflow: hidden;
 	list-style: none;
 	padding: 0;
+	margin: 0;
+	margin-top: 50px;
 }
 
 .left_sidemenu>li {
 	text-decoration: none;
 	width: 100%;
-	text-align: center;
 	line-height: 40px;
 	padding-bottom: 5%;
 	transition: background-color 0.5s ease;
@@ -57,28 +52,41 @@
 
 .left_sidemenu a {
 	text-decoration: none;
-	color: #fff;
+	color: black;
 	display: block;
+	padding-left: 20%;
 }
 
-/* .left_sidemenu .submenu a {
-  color: #fff;
-  display: block;
-  color: rgb(19, 151, 213)
-} */
-.submenu>li {
-	line-height: 50px;
-	background-color: rgb(22, 116, 161);
+.left_sidemenu i {
+	margin-right: 8px;
 }
 
-.left_sidemenu>li:hover {
-	overflow: hidden;
+.c_logo a {
+	text-decoration: none;
+	color: black;
+	display: block;
+	font-size: 35px;
+    margin-left: 5px;
+}
+
+.c_logo img {
+   width: 45px;
+   height: 45px;
+   margin-right: 3%;
+   margin-top: 1%;
+}
+
+.c_logo {
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .submenu li a:hover {
-	background-color: white;
-	color: rgb(22, 116, 161);
+    background-color: white;
+    color: #4e73df;
 }
+
 
 .left_sidemenu>li:hover .submenu {
 	height: auto;
@@ -93,4 +101,10 @@
 	overflow: hidden;
 	padding: 0;
 	transition: height 0.5s ease;
+	border-radius: 5px;
+	margin: 0 20px;
+}
+
+.left_sidemenu>li>a:focus + .submenu{
+	display:block;
 }

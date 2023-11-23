@@ -20,7 +20,8 @@ public class PagingHandler {
 	private boolean prev,next; //이전, 다음 존재 여부
 	private int totalCount;//총 게시글 수
 	private PagingVO pgvo;
-
+	
+	private String order;//정렬기준
 	private List<CommentVO> cmtList;
 	
 	// 현재 페이지 값 가져오기 용도 / totalCount DB에서 조회 매개변수로
@@ -46,8 +47,9 @@ public class PagingHandler {
 	}
 	public PagingHandler(PagingVO pgvo, int totalCount, List<CommentVO> cmtList) {
 
-		this(totalCount, pgvo);
+		this(totalCount, pgvo);	
 		this.cmtList = cmtList;
+	
 
 	}		
 }

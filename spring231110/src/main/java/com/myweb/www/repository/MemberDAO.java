@@ -24,7 +24,6 @@ public interface MemberDAO {
 
 	MemberVO selectOne(String id);
 
-	
 	int modify(MemberVO mvo);
 	
 	int modifyPwdEmpty(MemberVO mvo);
@@ -33,12 +32,9 @@ public interface MemberDAO {
 
 	void removeAuth(String email);
 
-	MemberVO selectOne2(String email);
-
 	int getTotalCount(PagingVO pagingVO);
 
 	int getMemberNo(String id);
-
 
 	String selectDepCd(String id);
 
@@ -49,7 +45,5 @@ public interface MemberDAO {
 	String checkId(String id);
 
 	long getMaxEmpNo();
-
-	boolean approval_club(MemberVO mvo);
 
 }

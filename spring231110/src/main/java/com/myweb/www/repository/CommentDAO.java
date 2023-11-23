@@ -9,21 +9,34 @@ import com.myweb.www.domain.PagingVO;
 
 public interface CommentDAO {
 
-	int insert(CommentVO cvo);
+	int insert(CommentVO cvo);  //o
 
 //	List<CommentVO> selectAll(long bno);
 
-	int delete(long cno);
+	int delete(long cmtNo); //O
 
 	int deleteCommentAll(long bno);
 
-	int update(CommentVO cvo);
+	int update(CommentVO cvo); //o
 
-	int selectOneBnoTotalCount(long bno);
+	int selectOneBnoTotalCount(long bno); //o
 
-	List<CommentVO> selectListPaging(@Param("bno") long bno,@Param("pgvo") PagingVO pgvo);
+	List<CommentVO> selectListPaging(@Param("bno") long bno,@Param("pgvo") PagingVO pgvo);//o
 
-//	void cmt_update(long bno);
+	int commentLikeCheck(@Param("cmtNo") long cmtNo,@Param("authId") String authId);
+
+	void deleteCommentLike(@Param("cmtNo") long cmtNo,@Param("id") String id);
+
+	void updateLikeQty(@Param("cmtNo") long cmtNo,@Param("num") int num);
+
+	void addCommentLike(@Param("cmtNo") long cmtNo,@Param("id") String id);
+
+	int selectCmtCount(long bno);
+
+	int cmtLikeQty(long cmtNo);
+
+
+ 
 
 
 

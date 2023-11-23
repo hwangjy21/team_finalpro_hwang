@@ -57,7 +57,6 @@ document.getElementById("chatSubmitBtn").addEventListener("click", () => {
 
             //alert("채팅글 insert 완료");
 
-
         } else {
             alert("댓글 insert 실패");
         }
@@ -126,7 +125,6 @@ function printChatList() {
 
                 //             <img class="media-object img-circle" style="width: 30px; height:30px;" src="/resources/img/anoyicon.png" alt="">
 
-
                 //         </a>
                 //     <div class="media-body">
                 //         <h4 class="media-heading">
@@ -137,6 +135,7 @@ function printChatList() {
                 //     </div>
                 // </div>
                 // </div>
+
                 let name1;
                 if (chatdto.fromID == currentUserID) {
                     name1 = "나";

@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,10 +39,8 @@ import com.myweb.www.domain.PagingVO;
 import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
 
-
 import com.myweb.www.security.AuthMember;
 import com.myweb.www.security.MemberVO;
-
 
 import com.myweb.www.service.BoardService;
 import com.myweb.www.service.ChatService;
@@ -75,6 +72,7 @@ public class ChatController {
 //		this.fh = fh;
 	}
 
+
 	// 익명 채팅글쓰기 jsp로 이동
 	@GetMapping("/chat")
 	public String register(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
@@ -86,11 +84,6 @@ public class ChatController {
 
 		return "/chatfolder/chat"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
-	
-	
-	
-	
-
 
 	@PostMapping(value ="/chat" , consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	@ResponseBody
@@ -160,10 +153,6 @@ public class ChatController {
 //		return "/board/list";
 //	}
 
-
-
-	
-
 	// 채팅글쓰기 jsp로 이동
 	@GetMapping("/find")
 	public String finduser(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
@@ -190,9 +179,7 @@ public class ChatController {
 		} else {
 		    log.info("Principal 객체가 UsernamePasswordAuthenticationToken 타입이 아닙니다.");
 		}
-		
 
-	    
 	    log.info("username는 "+username);
 	    // Model 객체에 사용자 이름(ID) 추가
 	    model.addAttribute("username", username);
@@ -202,8 +189,6 @@ public class ChatController {
 	    
 		return "/chatfolder/find"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
-	
-	
 	
 	@PostMapping(value ="/find" , consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -237,15 +222,6 @@ public class ChatController {
 	}
 	
 
-	
-	
-	
-	
-	
-	
-	
-	
-
 	// 서로 2명만 채팅글쓰기 jsp로 이동
 	@GetMapping("/chat2")
 	public String register2(Model model, Principal principal) {// jsp에서 온 매핑이랑 뷰로 들어가는 매핑이 같아서(이름이 같아서) void로 하면 왔던 곳으로 가라고 할 수 있음
@@ -256,8 +232,6 @@ public class ChatController {
 	    model.addAttribute("username", username);
 		return "/chatfolder/chat2"; // 이렇게 해도 됨(뷰로 들어가는 매핑)
 	}
-	
-	
 	
 	@PostMapping(value ="/chat2" , consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -278,13 +252,6 @@ public class ChatController {
 		return isOk > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 						: new ResponseEntity<String>("0", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-	
-	
-	
-	
-
-	
 	
 	//1:1 용 채팅 리스트만 출력하려고 함
 	@PostMapping(value ="/list2" , consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -317,10 +284,5 @@ public class ChatController {
 		return isOk > 0 ? new ResponseEntity<>(list2, HttpStatus.OK)
 						: new ResponseEntity<>(list2, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-
-	
-	
-	
 	
 }

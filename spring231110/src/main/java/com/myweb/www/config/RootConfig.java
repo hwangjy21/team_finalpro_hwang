@@ -71,9 +71,9 @@ public class RootConfig {
 	    // MariaDB 드라이버 클래스로 변경
 	    hikariConfig.setDriverClassName("org.mariadb.jdbc.Driver");
 	    // MariaDB JDBC URL로 변경, 포트는 MariaDB 기본 포트인 3306 사용
-	    hikariConfig.setJdbcUrl("jdbc:mariadb://aj2002.cafe24.com:3306/aj2002");
+	    hikariConfig.setJdbcUrl("jdbc:mariadb://aj2002.cafe24.com:3306/aj2002");//231120전경환
 //	    hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/springdb");
-//	    hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/aj2002");
+//	    hikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/aj2002");//231120전경환
 	    hikariConfig.setUsername("aj2002");
 	    hikariConfig.setPassword("k2m16ak47");
 	    hikariConfig.setMaximumPoolSize(5);

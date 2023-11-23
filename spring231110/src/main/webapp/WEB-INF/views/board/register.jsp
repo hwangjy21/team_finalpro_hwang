@@ -33,7 +33,18 @@
   <!--  -->
 </head>
 <body>
-   <div class="box">
+
+<jsp:include page="../common/l_side.jsp" />
+
+<jsp:include page="../common/nav.jsp" />
+	
+<div class="total">
+		<div class="subject">게시글 등록</div>
+		
+		
+		<div class="content">
+		
+		   <div class="box">
    <div class="box2">
 	   
                     <div class="card shadow mb-4">
@@ -112,6 +123,11 @@ $('.summernote').summernote({
 			</form>
 	</div></div>
 	</div></div>
+		
+		</div>
+</div>
+		<jsp:include page="../common/footer.jsp" />
+
 	
 </body>
 </html>

@@ -14,35 +14,20 @@
 }
 
 .icon_div {
-	display: flex;
-	align-items: center;
-	margin-left: auto;
-	width: 60px;
+   display: flex;
+   align-items: center;
+   margin-left: auto;
+   width: 60px;
 }
 
 .writer_div {
-	margin-right: 3%;
-}
-
-.c_logo {
-	display: flex;
-	align-items: center;
-	width: 3%;
-	margin-top: 3px;
-	margin-right: 2%;
+   margin-right: 3%;
 }
 
 .writer_div:hover {
-	color: black;
+   color: black;
 }
 
 .icon_div:hover {
-	color: black;
-}
-
-.c_logo img {
-	width: 35px;
-	height: 35px;
-	margin-right: 3%;
-	margin-top: 1%;
+   color: black;
 }

@@ -25,8 +25,8 @@ public class BoardTest {
 			bvo.setId("1");
 			bvo.setTitle("test title" + i);
 			bvo.setContent("test content" + i);
-			bvo.setBoardType("club");
-			bvo.setClubCd("cl001");
+			bvo.setBoardType("depart");
+			bvo.setDepCd("sales");
 			bdao.insert(bvo);
 		}
 	}

@@ -25,11 +25,21 @@ public interface BoardService {
 
 	List<BoardVO> getAnonyList();
 
-	BoardVO getBoardDetail(long bno);
+	BoardVO getBoardDetail(long bno, String authId);
 
 	int getDepartTotalCount(String depCd, PagingVO pgvo);
 
 	int getClubTotalCount(String clubCd, PagingVO pgvo);
+
+	void updateReadQty(long bno);
+
+	int boardLikeCheck(long bno, String id);
+
+	void deleteBoardLike(long bno, String id);
+
+	void addBoardLike(long bno, String id);
+
+	int commentCount(long bno);
 
 
 
