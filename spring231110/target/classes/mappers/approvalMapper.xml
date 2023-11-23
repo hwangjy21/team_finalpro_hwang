@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.ApprovalDAO">
+<insert id="approval_club"  parameterType="com.myweb.www.domain.ApprovalVO">
+insert into approval (club_no) values (#{clubNo})
+
+</insert>
+
+<select id="approvalExist" resultType="com.myweb.www.domain.ApprovalVO">
+SELECT SUBSTRING(club_no, LOCATE('CL', club_no) + 2) FROM approval;
+
+
+</select>
+</mapper>

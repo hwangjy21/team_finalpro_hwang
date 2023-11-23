@@ -1,0 +1,110 @@
+/* 사이드 메뉴바(왼쪽) */
+.left_sidemenu_div {
+	width: 12%;
+	min-height: 100vh;
+	background-color: white;
+	z-index: 1000;
+	position: fixed;
+	padding-top: 46.891px;
+	border-right: 1.5px solid #00000024;
+}
+
+.pro_img {
+	display: flex;
+	width: 90%;
+	height: 150px;
+	margin: 0 auto;
+	border-radius: 50%;
+	margin-top: 5%;
+	justify-content: center;
+}
+
+.pro_img>img {
+	width: 80%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+.member_detail {
+	margin: 0 auto;
+	width: 95%;
+	border: 1px solid black;
+	font-size: 70%;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+.left_sidemenu {
+	overflow: hidden;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	margin-top: 50px;
+}
+
+.left_sidemenu>li {
+	text-decoration: none;
+	width: 100%;
+	line-height: 40px;
+	padding-bottom: 5%;
+	transition: background-color 0.5s ease;
+}
+
+.left_sidemenu a {
+	text-decoration: none;
+	color: black;
+	display: block;
+	padding-left: 20%;
+}
+
+.left_sidemenu i {
+	margin-right: 8px;
+}
+
+.c_logo a {
+	text-decoration: none;
+	color: black;
+	display: block;
+	font-size: 35px;
+    margin-left: 5px;
+}
+
+.c_logo img {
+   width: 45px;
+   height: 45px;
+   margin-right: 3%;
+   margin-top: 1%;
+}
+
+.c_logo {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.submenu li a:hover {
+    background-color: white;
+    color: #4e73df;
+}
+
+
+.left_sidemenu>li:hover .submenu {
+	height: auto;
+}
+
+.submenu a>li:hover .submenu {
+	height: auto;
+}
+
+.submenu {
+	height: 0;
+	overflow: hidden;
+	padding: 0;
+	transition: height 0.5s ease;
+	border-radius: 5px;
+	margin: 0 20px;
+}
+
+.left_sidemenu>li>a:focus + .submenu{
+	display:block;
+}

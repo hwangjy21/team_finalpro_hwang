@@ -1,0 +1,85 @@
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+}
+
+nav {
+	background-color: white;
+	height: 10%;
+/* 	border-bottom: 1px solid black; */
+	color: rgb(19, 151, 213);
+	padding: 10px;
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+}
+
+/* 사이드 메뉴바(오른쪽) */
+.right_sidemenu_div {
+	width: 12%;
+	min-height: 100vh;
+	background: linear-gradient(to bottom, rgb(19, 151, 213), #1674a1);
+	z-index: 1000;
+	position: fixed;
+/* 	top: 5%; */
+}
+
+.right_sidemenu {
+	overflow: hidden;
+	list-style: none;
+	padding: 0;
+}
+
+.right_sidemenu>li {
+	width: 100%;
+	text-align: center;
+	line-height: 40px;
+	transition: background-color 0.5s ease;
+}
+
+.right_sidemenu a {
+	color: #fff;
+	display: block;
+}
+
+/* .right_sidemenu .submenu a {
+  color: #fff;
+  display: block;
+  color: rgb(19, 151, 213)
+} */
+.submenu>li {
+	line-height: 50px;
+	background-color: rgb(22, 116, 161);
+}
+
+.right_sidemenu>li:hover {
+	overflow: hidden;
+}
+
+.right_sidemenu>li:hover .submenu {
+	height: auto;
+}
+
+.submenu a>li:hover .submenu {
+	height: auto;
+	background-color:
+}
+
+.submenu {
+	height: 0;
+	overflow: hidden;
+	padding: 0;
+	transition: height 0.5s ease;
+}
+

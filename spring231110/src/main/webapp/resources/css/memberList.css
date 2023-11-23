@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: "GodoM";
+	src: url("../font/GodoM.otf") format("opentype"),
+		url("../font/GodoM.ttf") format("truetype");
+}
+
+* {
+	font-family: "GodoM";
+	font-weight: lighter;
+}
+
+.container-fluid {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	margin-bottom: 20px;
+}
+
+.pagination {
+	justify-content: center; 
+	--bs-pagination-disabled-bg: #f8f9fc;
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+.pagination a.active {
+	background-color: #4CAF50;
+	color: white;
+	border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+	background-color: #D06281;
+	color: white;
+}
+
+.active>.page-link, .page-link.active {
+	z-index: 3;
+	color: var(- -bs-pagination-active-color);
+	background-color: #4CB1E0;
+	border-color: #4CB1E0;
+}
+
+.page-link {
+	background-color: #f8f9fc;
+	border: none;
+}
+
+td {
+	text-decoration: none;
+	color: #424242c9;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.subject, .content {
+	background-color: #f8f9fc;
+}
+
+.subject {
+	color: #f8f9fc;
+	border-bottom: 0px;
+}
+
+.table {
+	border-collapse: separate !important;
+	border-radius: 10px;
+	border-spacing: 0;
+	border: 1px #e0e9f1;
+	line-height: 30px;
+	--bs-table-color-state: #444444c9;
+	--bs-table-bg: #fff; /* 테이블 배경색 */
+}
+.thead{
+	--bs-table-bg: #f8f9fc;
+}
+
+.detailBtn {
+	font-size: 1rem;
+	border-radius: 10rem;
+	display: block;
+	width: 100px;
+	color: #256cd6;
+    background-color: initial;
+    border: none;
+}
+
+.btn-primary {
+	background-color: #4CB1E0;
+	border: #D06281;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0; 
+	--bs-btn-hover-bg: #4CB1E0;
+}
+
+.me-2 {
+	border-radius: 0;
+}
+
+.form-select {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+td {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.btnTh, .empNm, .id {
+	width: 10%;
+}
+
+.depNm, .clubNm, .phone {
+	width: 15%;
+}
+
+.addr {
+	width: 30%;
+}
+
+.profileImg {
+	height: 30px;
+	width: 30px;
+	margin-right: 10px;
+	border-radius: 10px;
+}
+
+.head {
+	display: flex;
+}
+
+h3 {
+	margin: 0;
+	white-space: nowrap;
+	color: #152c45d6;
+}
+
+tr:nth-child(2n) {
+	--bs-table-bg: #4cb1e00a;
+}
+
+.form-select{
+	color: #6b7076;
+}
+
+.form-control:focus, .form-select:focus{
+	box-shadow: none;
+	border: var(--bs-border-width) solid var(--bs-border-color);
+}

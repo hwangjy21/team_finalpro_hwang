@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.MemberDAO">
+
+	<insert id="insertMember">
+		insert into member (id, pw, addr, phone, dep_cd, emp_nm, emp_birth)
+		VALUES(#{id}, #{pw}, #{addr}, #{phone}, #{depCd}, #{empNm},
+		#{empBirth});
+	</insert>
+
+	<!-- 기본아이디는 '롤_유저'로 등록 -->
+	<insert id="insertAuthInit">
+		insert into auth_member values('ROLE_USER', #{id})
+	</insert>
+
+	<select id="getMemberNo" resultType="int">
+		select emp_no from member where id = #{id}
+	</select>
+
+	<select id="selectEmail"
+		resultType="com.myweb.www.security.MemberVO"> <!--시큐리티컨피그에서 유저내임이 이메일임 -->
+		select * from member where id =#{id}
+	</select>
+
+	<select id="selectAuths"
+		resultType="com.myweb.www.security.AuthVO"> <!--시큐리티컨피그에서 유저내임이 이메일임 -->
+		select * from auth_member where id =#{id}
+	</select>
+
+	<update id="updateLastLogin">
+		update member set last_login = now() where id= #{id}
+	</update>
+
+	<select id="selectAll"
+		resultType="com.myweb.www.security.MemberVO">
+		select * from member
+		<include refid="search"></include>
+		limit #{pageStart}, #{qty}
+	</select>
+	
+	<!-- select m.emp_nm, m.id, m.addr, m.phone, c.club_nm, d.dep_nm from club c 
+		right join member m on m.club_cd = c.club_cd
+		left join department d on m.dep_cd = d.dep_cd -->
+
+	<select id="selectOne"
+		resultType="com.myweb.www.security.MemberVO">
+		select * from member where id =#{id};
+	</select>
+
+	<update id="updatePw">
+		update member set pw = #{pw} where id = #{id}
+	</update>
+	<update id="remove">
+		delete from member where id = #{id}
+	</update>
+	<update id="removeAuth">
+		delete from auth member where id = #{id}
+	</update>
+
+	<select id="checkId" resultType="string">
+		select id from member where id = #{id}
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from member
+		<include refid="search"></include>
+	</select>
+
+	<select id="selectDepCd" resultType="String">
+	select dep_cd from member where id=#{id}
+	</select>
+	
+	<select id="selecClubCd" resultType="String">
+	select club_cd from member where id=#{id}
+	</select>	
+
+  <sql id="search">
+     <if test="type != null">
+        <trim prefix="where" prefixOverrides="or">
+           <foreach collection="typeToArray" item="typed">
+              <trim prefix="or">
+                 <choose>
+                    <when test="typed =='n'.toString()">
+                       emp_nm like concat('%',#{keyword},'%')
+                    </when>
+                    <when test="typed =='i'.toString()">
+                       id like concat('%',#{keyword},'%')
+                    </when>
+                    <when test="typed =='a'.toString()">
+                       addr like concat('%',#{keyword},'%')
+                    </when>
+                    <when test="typed =='d'.toString()">
+                       dep_cd like concat('%',#{keyword},'%')
+                    </when>
+                    <when test="typed =='c'.toString()">
+                       club_cd like concat('%',#{keyword},'%')
+                    </when>
+                 </choose>
+              </trim>
+           </foreach>
+        </trim>
+     </if>
+  </sql>
+
+	
+	<select id="getMaxEmpNo" resultType="long">
+		select max(emp_no) from member
+	</select>
+
+</mapper>

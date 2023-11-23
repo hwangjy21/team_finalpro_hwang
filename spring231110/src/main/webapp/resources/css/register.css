@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+body {
+	font-size: .8rem;
+	box-sizing: border-box;
+	margin: 0px;
+}
+
+.jb-container {
+	height: 100vh;
+	background-color: Rgb(19, 151, 213);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.jb-container form {
+	width: 500px;
+	background-color: white;
+	padding: 40px;
+	border-top-left-radius: 0.35rem;
+	border-top-right-radius: 0.35rem;
+	border-bottom-right-radius: 0.35rem;
+	border-bottom-left-radius: 0.35rem;
+}
+
+input {
+	font-size: .8rem;
+}
+
+.inputCss, .selectInput {
+	font-size: .8rem;
+	border-radius: 10rem;
+	display: block;
+	width: 100%;
+	height: calc(1.5em + 0.75rem + 2px);
+	font-weight: 400;
+	line-height: 1.5;
+	color: #6e707e;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #d1d3e2;
+}
+
+.inputCss {
+	padding: 1.5rem 1rem;
+}
+
+.selectInput {
+	height: 50px;
+	padding: 0 1rem;
+}
+
+form div {
+	border-top-left-radius: 10rem;
+	border-top-right-radius: 10rem;
+	border-bottom-right-radius: 10rem;
+	border-bottom-left-radius: 10rem;
+}
+
+.joinBtn {
+	font-size: .8rem;
+	border-radius: 10rem;
+	padding: 0.75rem 1rem;
+	display: block;
+	width: 100%;
+	color: #fff;
+	background-color: Rgb(19, 151, 213);
+	border: none;
+	margin-top: 40px;
+}
+
+#test {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+/* .t1{
+   width: 150px;
+} */
+.form-select:hover {none;
+	
+}
+
+.inputCss option {
+	color: #000; /* 혹은 다른 원하는 색상으로 변경하세요 */
+}
+
+a {
+	margin-top: 20px;
+	color: white;
+}
+
+.explanation {
+	padding: 15px 20px;
+
+	background-color: #444444bf;
+	border-radius: 5px;
+	color: #ffffff;
+	margin: 10px;
+	position: absolute;
+	bottom: 5%;
+	display: none;
+
+}
+
+.explanation>p, .explanationModify>p {
+	margin: 0;
+}
+
+a:hover+.explanation {
+	display: block;
+}
+
+.explanationModify {
+	padding: 15px 20px;
+	background-color: #444444bf;
+	border-radius: 5px;
+	color: #ffffff;
+	margin: 10px;
+	position: absolute;
+	bottom: 20%;
+	display: none;
+}
+
+a:hover+.explanationModify {
+	display: block;
+}
+
+.idInputBox {
+	display: flex;
+}
+
+#checkId{
+	font-size: .8rem;
+	border-radius: 10rem;
+	padding: 0.75rem 1rem;
+	display: block;
+	width: 40%;
+	color: #fff;
+	background-color: Rgb(19, 151, 213);
+	border: none;
+}
+
+.passwordCheck, .birthCheck, .phoneCheck, .passwordCheck2{
+	margin: 10px;
+    color: red;
+    display: none;
+    font-size: 11px;
+}
+
+.passwordCheckOk, .passwordCheckOk2{
+	margin: 10px;
+    color: green;
+    display: none;
+    font-size: 11px;
+}
+
+.block{
+	display: block;
+}

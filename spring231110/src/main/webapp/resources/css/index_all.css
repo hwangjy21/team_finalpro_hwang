@@ -1,0 +1,50 @@
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+.body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+	background-color: #f8f9fc;	
+}
+
+.total {
+	height: 82%;
+	margin-top: 8%;
+	width: 83%;
+	position: absolute;
+	top: 40%;
+	left: 56%;
+	transform: translate(-50%, -50%);
+
+}
+
+.subject {
+	padding: 0.75rem 1.25rem;
+	margin-bottom: 0;
+	background-color: #f8f9fc;
+	border-bottom: 1px solid #e3e6f0;
+}
+
+.content {
+	width: 100%;
+	height: 94%;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+@media screen and (max-width: 1200px) {
+	.total {
+		height: 95%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.total {
+		height: 99%;
+	}
+
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.ClubDAO">
+
+	<select id="list" resultType="com.myweb.www.domain.ClubVO">
+		select * from club
+		<include refid="search"></include>
+		order by club_cd desc limit #{pageStart}, #{qty}
+	</select>
+	<select id="totalCount" resultType="int">
+		select count(*) from club
+		<include refid="search"></include>
+	</select>
+	
+
+
+	<sql id="search">
+		<if test="type != null"></if>
+		<trim prefix="where(" suffix=")" prefixOverrides="or">
+			<foreach collection="typeToArray" item="type">
+				<trim prefix="or">
+					<choose>
+						<when test="type == 't'.toString()">
+							title like concat('%',#{keyword},'%')
+						</when>
+						<when test="type == 'w'.toString()">
+							writer like concat('%',#{keyword},'%')
+						</when>
+						<when test="type == 'c'.toString()">
+							content like concat('%',#{keyword},'%')
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+</mapper>

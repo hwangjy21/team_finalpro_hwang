@@ -1,0 +1,33 @@
+.nav_header {
+    background-color: white;
+    height: 46.891px;
+    color: rgb(19, 151, 213);
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05); 
+    border-bottom: 1px solid #e3e6f0;
+}
+
+.icon_div {
+   display: flex;
+   align-items: center;
+   margin-left: auto;
+   width: 60px;
+}
+
+.writer_div {
+   margin-right: 3%;
+}
+
+.writer_div:hover {
+   color: black;
+}
+
+.icon_div:hover {
+   color: black;
+}

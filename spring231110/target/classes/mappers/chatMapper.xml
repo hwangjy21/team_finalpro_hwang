@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.www.repository.ChatDAO">
+	<insert id="submit">
+		insert into chat
+		values(NULL,#{fromID},#{toID},#{chatContent},NOW(),null,null,null,null);
+	</insert>
+	<select id="selectAll" resultType="com.myweb.www.domain.ChatDTO">	
+		select * from chat where toID is null limit 500;
+	</select>
+	<select id="selectEmpId" resultType="com.myweb.www.security.MemberVO">
+		select * from member where id = #{toID};
+	</select>
+	<select id="selectEmp2" resultType="com.myweb.www.security.MemberVO">
+		select * from chat where toID = #{toID} and fromID = #{fromID};
+	</select>
+	<insert id="submitEmp2">
+		insert into chat
+		values(NULL,#{fromID},#{toID},#{chatContent},NOW(),null,null,null,null);
+	</insert>
+	
+
+</mapper>

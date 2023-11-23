@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+body {
+	font-size: .8rem;
+	box-sizing: border-box;
+	margin: 0px;
+}
+
+.jb-container {
+	height: 100vh;
+	background-color: Rgb(19, 151, 213);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.jb-container form {
+	width: 500px;
+	background-color: white;
+	padding: 30px;
+	border-top-left-radius: 0.35rem;
+	border-top-right-radius: 0.35rem;
+	border-bottom-right-radius: 0.35rem;
+	border-bottom-left-radius: 0.35rem;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputCss{
+	font-size: .8rem;
+	border-radius: 10rem;
+	display: block;
+	width: 90%;
+	height: 3px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #6e707e;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #d1d3e2;
+	padding: 1.5rem 1rem;
+	margin: 10px;
+}
+
+form div {
+	border-top-left-radius: 10rem;
+	border-top-right-radius: 10rem;
+	border-bottom-right-radius: 10rem;
+	border-bottom-left-radius: 10rem;
+}
+
+.loginBtn {
+	font-size: 1rem;
+	border-radius: 10rem;
+	padding: 1rem 1rem;
+	display: block;
+	width: 500px;
+	color: #fff;
+	background-color: Rgb(19, 151, 213);
+	border: none;
+	margin: 40px 0 5px;
+}
+
+#test {
+	display: flex;
+	justify-content: space-between;
+}
+/* .t1{
+   width: 150px;
+} */
+
+.inputCss option {
+	color: #000; /* 혹은 다른 원하는 색상으로 변경하세요 */
+}
+
+h4{
+	color: white;
+	font-size: 30px;
+}
+
+.mb-3{
+	width: 500px;
+	margin-top: 10px;
+}
+
+.explanation{
+	padding: 10px 15px;
+    background-color: #444444bf;
+    border-radius: 5px;
+    color: #ffffff;
+    margin: 10px;
+    position: absolute;
+
+    bottom: 20%;
+    display: none; 
+}
+
+.aTagDiv{
+	margin-top: 20px;
+	display: flex;
+    justify-content: space-evenly;
+    width: 500px;
+}
+
+.aTag{
+	color: white;
+}
+
+.view{
+	display: block;
+}
+

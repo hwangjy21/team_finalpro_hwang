@@ -1,0 +1,19 @@
+.footer_detail {
+
+	color: rgb(22, 116, 161);
+	padding: 20px;
+	text-align: center;
+	margin-top: auto;
+	width: calc(100% - 14.5%);
+	margin-left: 12%;
+}
+
+.footer-links {
+	margin-top: 10px;
+}
+
+.footer-links a {
+	color: #fff;
+	margin: 0 10px;
+	text-decoration: none;
+}

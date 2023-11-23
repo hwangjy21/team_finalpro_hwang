@@ -1,0 +1,96 @@
+--2023-11-13--
+--board 테이블--
+CREATE TABLE `board` (
+  `bno` bigint(20) NOT NULL AUTO_INCREMENT,
+  `emp_no` bigint(20) NOT NULL,
+  `emp_nm` varchar(50) NOT NULL,
+  `title` varchar(500) NOT NULL,
+  `content` text NOT NULL,
+  `reg_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `mod_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `board_type` varchar(20) NOT NULL,
+  `club_cd` varchar(100) DEFAULT NULL,
+  `dep_cd` varchar(100) DEFAULT NULL,
+  `cmt_cnt` int(11) DEFAULT '0',
+  `read_cnt` int(11) DEFAULT '0',
+  PRIMARY KEY (`dep_bno`)
+)
+
+--member 테이블--
+CREATE TABLE `member` (
+  `emp_no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(100) NOT NULL,
+  `pw` varchar(100) NOT NULL,
+  `addr` varchar(500) NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `dep_cd` varchar(100) NOT NULL,
+  `emp_nm` varchar(50) NOT NULL,
+  `emp_birth` int(11) NOT NULL,
+  `last_login` datetime DEFAULT NULL,
+  PRIMARY KEY (`emp_no`)
+)
+
+--auth_member 테이블--
+CREATE TABLE `auth_member` (
+  `auth` varchar(20) NOT NULL,
+  `id` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+)
+
+--chat 테이블--
+CREATE TABLE `chat` (
+  `chatID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fromID` varchar(100) DEFAULT NULL,
+  `toID` varchar(100) DEFAULT NULL,
+  `chatContent` varchar(100) DEFAULT NULL,
+  `chatTime` datetime DEFAULT NULL,
+  `read_or_not` tinyint(1) DEFAULT NULL,
+  `fromNm` varchar(100) DEFAULT NULL,
+  `toNm` varchar(100) DEFAULT NULL,
+  `emp_no` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`chatID`)
+)
+
+--comment 테이블--
+CREATE TABLE `comment` (
+  `comment_no` bigint(20) NOT NULL AUTO_INCREMENT,
+  `emp_no` bigint(20) NOT NULL,
+  `emp_nm` varchar(100) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `content` text,
+  `reg_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `mod_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `dep_bno` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`comment_no`)
+)
+
+--file 테이블--
+CREATE TABLE `file` (
+  `uuid` varchar(200) NOT NULL,
+  `save_dir` varchar(200) NOT NULL,
+  `file_name` varchar(200) NOT NULL,
+  `file_size` bigint(20) DEFAULT NULL,
+  `reg_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `file_type` tinyint(2) DEFAULT '0',
+  `dep_bno` bigint(20) DEFAULT NULL,
+  `total_bno` bigint(20) DEFAULT NULL,
+  `car_no` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`uuid`)
+  
+  
+  
+  
+  --club 테이블--
+  
+  CREATE TABLE club (
+    club_cd VARCHAR(100) PRIMARY KEY,
+    club_nm VARCHAR(100),
+    emp_no BIGINT,
+    club_intro VARCHAR(300),
+    club_man BOOLEAN,
+    emp_nm VARCHAR(100),
+    club_type VARCHAR(100)
+
+);
+  
+) 
